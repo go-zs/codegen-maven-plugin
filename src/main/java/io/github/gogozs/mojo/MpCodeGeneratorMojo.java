@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 
-@Mojo(name = "generator", defaultPhase = LifecyclePhase.COMPILE)
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.COMPILE)
 public class MpCodeGeneratorMojo extends AbstractMojo {
 
     private static final String DEFAULT_PATH = "generator-config.yaml";
