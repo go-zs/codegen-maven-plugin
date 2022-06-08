@@ -19,24 +19,24 @@ import ${superControllerClassPackage};
  * <p>
  * ${table.comment!} 前端控制器
  * </p>
- *
- * @author ${author}
- * @since ${date}
- */
+*
+* @author ${author}
+* @since ${date}
+*/
 <#if restControllerStyle>
-@RestController
+ @RestController
 <#else>
-@Controller
+ @Controller
 </#if>
-@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
+@RequestMapping("/api/v1/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
 <#if kotlin>
-class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
+ class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
-<#if superControllerClass??>
-public class ${table.controllerName} extends ${superControllerClass} {
-<#else>
-public class ${table.controllerName} {
-</#if>
+ <#if superControllerClass??>
+  public class ${table.controllerName} extends ${superControllerClass} {
+ <#else>
+  public class ${table.controllerName} {
+ </#if>
 
-}
+ }
 </#if>
