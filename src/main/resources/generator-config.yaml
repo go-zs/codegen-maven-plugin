@@ -31,17 +31,17 @@ dataSourceConfig:
   password: test
 packageConfig:
   # 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
-  parent: com.github.zs
+  parent: io.github.gogozs
   # 父包模块名
   moduleName: generator
   # Entity包名
-  entity: mybatis.entity
+  entity: entity
   # Service包名
-  service: mybatis.service
+  service: service
   # Service Impl包名
-  serviceImpl: mybatis.service.impl
+  serviceImpl: service.impl
   # Mapper包名
-  mapper: mybatis.mapper
+  mapper: mapper
   # Mapper XML包名
   xml: mapper
   # Controller包名
@@ -64,7 +64,7 @@ templateConfig:
 #  controller:
 
 # 默认VELOCITY, 可选FREEMARKER, BEETL
-templateEngine: FREEMARKER
+templateEngine: VELOCITY
 strategyConfig:
   # 数据库表映射到实体的命名策略
   naming: underline_to_camel

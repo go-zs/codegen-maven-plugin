@@ -4,7 +4,14 @@
 package ${package.Controller};
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import javax.annotation.Resource;
+import ${package.Entity}.${table.entityName};
+import ${package.Service}.${table.serviceName};
 
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
@@ -29,16 +36,70 @@ import ${superControllerClassPackage};
 @Controller
 #end
 @RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-#if(${kotlin})
-class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
 
-#else
 #if(${superControllerClass})
 public class ${table.controllerName} extends ${superControllerClass} {
 #else
 public class ${table.controllerName} {
 #end
 
+    @Resource
+    private $!{table.serviceName} ${table.serviceName};
+
+    /**
+    * 分页查询
+    *
+    * @param pageQuery  分页对象
+    * @return 查询结果
+    */
+    @GetMapping
+    public ResponseEntity<Page<$!{table.entityName}>> queryByPage(@RequestParam Page<$!{table.entityName}> pageQuery) {
+        return ResponseEntity.ok(this.$!{table.serviceName}.page(pageQuery));
+    }
+
+    /**
+    * 通过主键查询单条数据
+    *
+    * @param id 主键
+    * @return 单条数据
+    */
+    @GetMapping("{id}")
+    public ResponseEntity<$!{table.entityName}> queryById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(this.$!{table.serviceName}.getById(id));
+    }
+
+    /**
+     * 新增数据
+     *
+     * @param $!{table.name} 实体
+     * @return 新增结果
+     */
+    @PostMapping
+    public ResponseEntity<Boolean> add(@RequestParam $!{table.entityName} $!{table.name}) {
+        return ResponseEntity.ok(this.$!{table.serviceName}.save($!{table.name}));
+    }
+
+    /**
+     * 编辑数据
+     *
+     * @param $!{table.name} 实体
+     * @return 编辑结果
+     */
+    @PutMapping
+    public ResponseEntity<Boolean> edit(@RequestParam $!{table.entityName} $!{table.name}) {
+        return ResponseEntity.ok(this.$!{table.serviceName}.updateById($!{table.name}));
+    }
+
+    /**
+    * 删除数据
+    *
+    * @param id 主键
+    * @return 删除是否成功
+    */
+    @DeleteMapping
+    public ResponseEntity<Boolean> deleteById(String id){
+        return ResponseEntity.ok(this.$!{table.serviceName}.removeById(id));
+    }
+
 }
 
-#end
