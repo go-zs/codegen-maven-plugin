@@ -59,12 +59,12 @@ class ${entity} : Serializable {
 #elseif(${field.fill})
 ## -----   存在字段填充设置   -----
 #if(${field.convert})
-    @TableField(value = "${field.name}", fill = FieldFill.${field.fill})
+    @TableField(value = "`${field.name}`", fill = FieldFill.${field.fill})
 #else
     @TableField(fill = FieldFill.${field.fill})
 #end
 #elseif(${field.convert})
-    @TableField("${field.name}")
+    @TableField("`${field.name}`")
 #end
 ## 乐观锁注解
 #if(${versionFieldName}==${field.name})
