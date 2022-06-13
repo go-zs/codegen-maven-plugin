@@ -4,8 +4,6 @@
 package ${package.Controller};
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +33,7 @@ import ${superControllerClassPackage};
 #else
 @Controller
 #end
-@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-
+@RequestMapping("/api/v1/${table.entityName}")
 #if(${superControllerClass})
 public class ${table.controllerName} extends ${superControllerClass} {
 #else
