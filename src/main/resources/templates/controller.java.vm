@@ -72,7 +72,7 @@ public class ${table.controllerName} {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Boolean> add(@RequestParam $!{table.entityName} $!{table.name}) {
+    public ResponseEntity<Boolean> add(@RequestBody $!{table.entityName} $!{table.name}) {
         return ResponseEntity.ok(this.$!{table.serviceName}.save($!{table.name}));
     }
 
@@ -83,7 +83,7 @@ public class ${table.controllerName} {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<Boolean> edit(@RequestParam $!{table.entityName} $!{table.name}) {
+    public ResponseEntity<Boolean> edit(@RequestBody $!{table.entityName} $!{table.name}) {
         return ResponseEntity.ok(this.$!{table.serviceName}.updateById($!{table.name}));
     }
 

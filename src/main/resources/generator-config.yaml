@@ -86,6 +86,8 @@ strategyConfig:
   entityTableFieldAnnotationEnable: true
   # 【实体】是否生成字段常量（默认 false)
   entityColumnConstant: true
+  tablePrefix:
+    - "t_"
   # 需要包含的表名，允许正则表达式（与exclude二选一配置)
   include:
-    - user
+    - t_user
