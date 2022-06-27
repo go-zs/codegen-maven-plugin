@@ -5,11 +5,11 @@ package ${package.Controller};
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import ${package.Entity}.${table.entityName};
 import ${package.Service}.${table.serviceName};
+import io.github.gogozs.model.ResponseEntity;
 
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
@@ -54,7 +54,7 @@ public class ${table.controllerName} {
     */
     @GetMapping
     public ResponseEntity<Page<$!{table.entityName}>> queryByPage(@RequestParam Page<$!{table.entityName}> pageQuery) {
-        return ResponseEntity.ok(this.$!{service}.page(pageQuery));
+        return ResponseEntity.success(this.$!{service}.page(pageQuery));
     }
 
     /**
@@ -65,7 +65,7 @@ public class ${table.controllerName} {
     */
     @GetMapping("{id}")
     public ResponseEntity<$!{table.entityName}> queryById(@PathVariable("id") long id) {
-        return ResponseEntity.ok(this.$!{service}.getById(id));
+        return ResponseEntity.success(this.$!{service}.getById(id));
     }
 
     /**
@@ -76,7 +76,7 @@ public class ${table.controllerName} {
      */
     @PostMapping
     public ResponseEntity<Boolean> add(@RequestBody $!{table.entityName} $!{table.name}) {
-        return ResponseEntity.ok(this.$!{service}.save($!{table.name}));
+        return ResponseEntity.success(this.$!{service}.save($!{table.name}));
     }
 
     /**
@@ -87,7 +87,7 @@ public class ${table.controllerName} {
      */
     @PutMapping
     public ResponseEntity<Boolean> edit(@RequestBody $!{table.entityName} $!{table.name}) {
-        return ResponseEntity.ok(this.$!{service}.updateById($!{table.name}));
+        return ResponseEntity.success(this.$!{service}.updateById($!{table.name}));
     }
 
     /**
@@ -98,7 +98,7 @@ public class ${table.controllerName} {
     */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(String id){
-        return ResponseEntity.ok(this.$!{service}.removeById(id));
+        return ResponseEntity.success(this.$!{service}.removeById(id));
     }
 
 }
