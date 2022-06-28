@@ -36,7 +36,7 @@ import ${superControllerClassPackage};
 #else
 @Controller
 #end
-@RequestMapping("/api/v1/${table.entityName}")
+@RequestMapping("/api/v1/${table.entityName.toLowerCase()}")
 #if(${superControllerClass})
 public class ${table.controllerName} extends ${superControllerClass} {
 #else
@@ -49,12 +49,18 @@ public class ${table.controllerName} {
     /**
     * 分页查询
     *
-    * @param pageQuery  分页对象
+    * @param pageNumber   分页页码
+    * @param pageSize     每页数量
+    * @param searchCount  是否count总数
     * @return 查询结果
     */
     @GetMapping
-    public ResponseEntity<Page<$!{table.entityName}>> queryByPage(@RequestParam Page<$!{table.entityName}> pageQuery) {
-        return ResponseEntity.success(this.$!{service}.page(pageQuery));
+    public ResponseEntity<Page<$!{table.entityName}>> queryByPage(
+            @RequestParam(value = "pageNumber", required = false, defaultValue = "1") long pageNumber,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") long pageSize,
+            @RequestParam(value = "searchCount", required = false, defaultValue = "false") boolean searchCount) {
+        Page<$!{table.entityName}> page = new Page<>(pageNumber, pageSize, searchCount);
+        return ResponseEntity.success(this.$!{service}.page(page));
     }
 
     /**
