@@ -4,12 +4,10 @@
 package ${package.Controller};
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import ${package.Entity}.${table.entityName};
 import ${package.Service}.${table.serviceName};
-import io.github.gogozs.model.ResponseEntity;
 
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
@@ -55,12 +53,12 @@ public class ${table.controllerName} {
     * @return 查询结果
     */
     @GetMapping
-    public ResponseEntity<Page<$!{table.entityName}>> queryByPage(
+    public ResponseResult<Page<$!{table.entityName}>> queryByPage(
             @RequestParam(value = "pageNumber", required = false, defaultValue = "1") long pageNumber,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") long pageSize,
             @RequestParam(value = "searchCount", required = false, defaultValue = "false") boolean searchCount) {
         Page<$!{table.entityName}> page = new Page<>(pageNumber, pageSize, searchCount);
-        return ResponseEntity.success(this.$!{service}.page(page));
+        return ResponseResult.success(this.$!{service}.page(page));
     }
 
     /**
@@ -70,8 +68,8 @@ public class ${table.controllerName} {
     * @return 单条数据
     */
     @GetMapping("{id}")
-    public ResponseEntity<$!{table.entityName}> queryById(@PathVariable("id") long id) {
-        return ResponseEntity.success(this.$!{service}.getById(id));
+    public ResponseResult<$!{table.entityName}> queryById(@PathVariable("id") long id) {
+        return ResponseResult.success(this.$!{service}.getById(id));
     }
 
     /**
@@ -81,8 +79,8 @@ public class ${table.controllerName} {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Boolean> add(@RequestBody $!{table.entityName} $!{table.name}) {
-        return ResponseEntity.success(this.$!{service}.save($!{table.name}));
+    public ResponseResult<Boolean> add(@RequestBody $!{table.entityName} $!{table.name}) {
+        return ResponseResult.success(this.$!{service}.save($!{table.name}));
     }
 
     /**
@@ -92,8 +90,8 @@ public class ${table.controllerName} {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<Boolean> edit(@RequestBody $!{table.entityName} $!{table.name}) {
-        return ResponseEntity.success(this.$!{service}.updateById($!{table.name}));
+    public ResponseResult<Boolean> edit(@RequestBody $!{table.entityName} $!{table.name}) {
+        return ResponseResult.success(this.$!{service}.updateById($!{table.name}));
     }
 
     /**
@@ -103,8 +101,8 @@ public class ${table.controllerName} {
     * @return 删除是否成功
     */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String id){
-        return ResponseEntity.success(this.$!{service}.removeById(id));
+    public ResponseResult<Boolean> deleteById(String id){
+        return ResponseResult.success(this.$!{service}.removeById(id));
     }
 
 }
